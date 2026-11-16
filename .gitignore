@@ -1,0 +1,7 @@
+/target
+*.pdb
+*.ilk
+*.exp
+*.map
+.DS_Store
+Thumbs.db

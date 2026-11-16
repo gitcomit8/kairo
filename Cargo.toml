@@ -1,0 +1,52 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.90"
+publish = false
+
+[workspace.dependencies]
+kairo-metrics = { path = "crates/kairo-metrics" }
+kairo-platform-win = { path = "crates/kairo-platform-win" }
+kairo-gfx = { path = "crates/kairo-gfx" }
+
+windows = { version = "0.62", features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Direct3D",
+    "Win32_Graphics_Direct3D12",
+    "Win32_Graphics_Dwm",
+    "Win32_Graphics_Dxgi",
+    "Win32_Graphics_Dxgi_Common",
+    "Win32_Graphics_Gdi",
+    "Win32_Security",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Threading",
+    "Win32_UI_HiDpi",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_UI_WindowsAndMessaging",
+] }
+
+# Shipping build: this is the configuration all performance numbers are measured in.
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "debuginfo"
+
+# Same as release but with symbols, for Tracy / ETW symbol resolution.
+[profile.perf]
+inherits = "release"
+strip = "none"
+debug = 1
+
+# Debug builds stay debuggy for our own crates, but dependencies (windows bindings,
+# D3D12 metadata) are optimised so startup timing is not meaningless.
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 2
