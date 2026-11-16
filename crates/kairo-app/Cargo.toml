@@ -1,0 +1,17 @@
+[package]
+name = "kairo-app"
+description = "Kairo browser executable: Phase 0 smoke harness."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "kairo"
+path = "src/main.rs"
+
+[dependencies]
+kairo-gfx.workspace = true
+kairo-metrics.workspace = true
+kairo-platform-win.workspace = true
+windows.workspace = true
