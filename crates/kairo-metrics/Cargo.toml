@@ -1,0 +1,11 @@
+[package]
+name = "kairo-metrics"
+description = "Measurement primitives: startup timeline, frame pacing, percentile stats."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+
+[dev-dependencies]
