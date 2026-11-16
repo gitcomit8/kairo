@@ -1,0 +1,16 @@
+[package]
+name = "kairo-gfx"
+description = "D3D12 device and a flip-model swapchain at frame latency 1."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+windows.workspace = true
+
+[features]
+# Enable the D3D12 debug layer at runtime; off by default because it costs frames.
+# Selectable at runtime too (see `Gfx::new`'s `enable_debug`), this feature only compiles
+# the validation interfaces in.
+debug-layer = []
